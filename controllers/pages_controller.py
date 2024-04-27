@@ -26,19 +26,15 @@ class PagesController(Controller):
         self.response.set_body('<a href="/"><h1>Third page</h1></a>')
 
     def game(self):
-        self.response.set_body(f'<h1>{clicks["clicks"]}</h1><form method="post" action="/add_click">'
+        clicks["clicks"] = 0
+        self.response.set_body(f'<h1>{clicks["clicks"]}</h1><form method="get" action="/add_click/">'
                                '<input type="submit" value="Click!"></form>')
 
     def add_click(self):
         clicks["clicks"] += 1
-        self.response.set_body(f'<h1>{clicks["clicks"]}</h1><form method="post" action="/add_click">'
-                               '<input type="submit" value="Click!"></form><form method="post" action="/refresh">'
+        self.response.set_body(f'<h1>{clicks["clicks"]}</h1><form method="get" action="/add_click/">'
+                               '<input type="submit" value="Click!"></form><form method="get" action="/game/">'
                                '<input type="submit" value="Refresh!"></form>')
-
-    def refresh(self):
-        clicks["clicks"] = 0
-        self.response.set_body(f'<h1>{clicks["clicks"]}</h1><form method="post" action="/add_click">'
-                               '<input type="submit" value="Click!"></form>')
 
     @staticmethod
     def not_found(request, response):

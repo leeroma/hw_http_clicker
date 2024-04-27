@@ -10,6 +10,7 @@ class MyTCPHandler(StreamRequestHandler):
         request = Request(self.rfile)
         response = Response(self.wfile)
         response.add_header('Connetion', 'close')
+
         router.run(request, response)
         response.send()
 
